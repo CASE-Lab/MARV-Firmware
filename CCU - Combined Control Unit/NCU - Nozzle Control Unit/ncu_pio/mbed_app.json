@@ -1,0 +1,9 @@
+{
+    "requires": ["bare-metal"],
+    "target_overrides": {
+        "*": {
+            "platform.default-serial-baud-rate": 115200,
+            "target.c_lib": "small"
+        }
+    }
+}
