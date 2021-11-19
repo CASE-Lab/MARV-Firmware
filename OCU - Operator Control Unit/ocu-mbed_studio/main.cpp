@@ -23,13 +23,10 @@ using namespace std::chrono;
 
 int8_t testVar = 10;
 
-float wheelMiddle=0;
-
 void setupMenus();
 void readInput();
 
 //Variables for button and wheel input
-Timer wheelTimeoutTimer;
 Timer wheelDebounceTimer;
 Timer btnDebounceTimer;
 Timer doubleClickTimer;
@@ -51,9 +48,6 @@ int main() {
     systemTimeTimer.start();
     heartbeat unit_status(&databus, canStatusReq_ID_OCU);
 
-    //Calibrate input wheel
-    wheelMiddle = WHEEL;
-    wheelDebounceTimer.start();
     Timer displayUpdateTimer;
     displayUpdateTimer.start();
 
@@ -505,7 +499,7 @@ void readInput(){
 
     //##########################################################################################
 
-    //Read wheel, sample multiple times
+    //Read wheel (now two buttons on one single input), sample multiple times
     float WHEEL_reading = 0;
     for(uint8_t i = 0; i<5; i++){
         WHEEL_reading += WHEEL.read();
@@ -513,39 +507,21 @@ void readInput(){
     WHEEL_reading = WHEEL_reading/5;
     
     //##########################################################################################
-    if(enableWheelInput && WHEEL_reading > wheelMiddle+wheelDeadBand && duration_cast<milliseconds>(wheelDebounceTimer.elapsed_time()).count() > wheelDebounceTime){ //If input enabled and wheel up, then block input
+    if(enableWheelInput && WHEEL_reading > wheelMiddle && WHEEL_reading < wheelMiddle+wheelUpInput && duration_cast<milliseconds>(wheelDebounceTimer.elapsed_time()).count() == 0){ //If input enabled and wheel up, then block input
         enableWheelInput=false;
         scrWheelUp=true;
-        wheelDebounceTimer.reset();
+        wheelDebounceTimer.start();
     }
-    else if(enableWheelInput && WHEEL_reading < wheelMiddle-wheelDeadBand && duration_cast<milliseconds>(wheelDebounceTimer.elapsed_time()).count() > wheelDebounceTime){ //wheel down
+    else if(enableWheelInput && WHEEL_reading < wheelMiddle && WHEEL_reading > wheelMiddle-wheelDownInput && duration_cast<milliseconds>(wheelDebounceTimer.elapsed_time()).count() == 0){ //wheel down
         enableWheelInput=false;
         scrWheelDown=true;
-        wheelDebounceTimer.reset();
+        wheelDebounceTimer.start();
     }
-    else if(abs(WHEEL_reading-wheelMiddle) >= wheelThreshold_1 && duration_cast<milliseconds>(wheelTimeoutTimer.elapsed_time()).count() == 0){ //Start auto scroll timer
-        wheelTimeoutTimer.start();
+    else if(!enableWheelInput && WHEEL_reading < wheelNoInput && duration_cast<milliseconds>(wheelDebounceTimer.elapsed_time()).count() > wheelDebounceTime){
+        enableWheelInput = true;
+        wheelDebounceTimer.stop(); wheelDebounceTimer.reset();
     }
-    else if(!enableWheelInput){ //Allow input if wheel in middle or enough time has passed
-        wheelDebounceTimer.reset();
-        if(WHEEL_reading <= wheelMiddle+(wheelDeadBand/2) && WHEEL_reading >= wheelMiddle-(wheelDeadBand/2)){ //Wheel in middle
-            enableWheelInput=true;
-            wheelTimeoutTimer.stop(); wheelTimeoutTimer.reset();
-        }
-        else if(abs(WHEEL_reading-wheelMiddle) < wheelThreshold_2 && abs(WHEEL_reading-wheelMiddle) > wheelThreshold_1 && //Wheel within threshold 1 and 2 (auto scroll)
-                    duration_cast<milliseconds>(wheelTimeoutTimer.elapsed_time()).count() > wheelTimeout_1){
-            enableWheelInput=true;
-            wheelTimeoutTimer.stop(); wheelTimeoutTimer.reset();
-        }
-        else if(abs(WHEEL_reading-wheelMiddle) >= wheelThreshold_2 && 
-                    duration_cast<milliseconds>(wheelTimeoutTimer.elapsed_time()).count() > wheelTimeout_2){ //Wheel over threshold 2 (faster auto scroll)
-            enableWheelInput=true;
-            wheelTimeoutTimer.stop(); wheelTimeoutTimer.reset();
-        }
-    }
-    else if(duration_cast<milliseconds>(wheelDebounceTimer.elapsed_time()).count() > 5939000){
-        wheelDebounceTimer.reset();
-    }
+
     //##########################################################################################
     
 }

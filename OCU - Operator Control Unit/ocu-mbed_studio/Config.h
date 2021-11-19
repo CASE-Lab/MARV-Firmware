@@ -119,11 +119,10 @@
 
 //BUTTON AND WHEEL CONFIG
 //----------------------------------------------------------------------------
-#define wheelTimeout_1          500  
-#define wheelTimeout_2          200  
-#define wheelDeadBand           0.05
-#define wheelThreshold_1        0.125
-#define wheelThreshold_2        0.35
+#define wheelNoInput            0.10
+#define wheelDownInput          0.35
+#define wheelUpInput            0.35          
+#define wheelMiddle             0.50
 #define btnDebounceTime         50
 #define doubleClickTime         750
 #define wheelDebounceTime       100
