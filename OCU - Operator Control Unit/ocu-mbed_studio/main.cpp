@@ -498,7 +498,7 @@ void readInput(){
     }
 
     //##########################################################################################
-
+    
     //Read wheel (now two buttons on one single input), sample multiple times
     float WHEEL_reading = 0;
     for(uint8_t i = 0; i<5; i++){
@@ -511,11 +511,13 @@ void readInput(){
         enableWheelInput=false;
         scrWheelUp=true;
         wheelDebounceTimer.start();
+        //printf("value: %f",WHEEL_reading);
     }
     else if(enableWheelInput && WHEEL_reading < wheelMiddle && WHEEL_reading > wheelMiddle-wheelDownInput && duration_cast<milliseconds>(wheelDebounceTimer.elapsed_time()).count() == 0){ //wheel down
         enableWheelInput=false;
         scrWheelDown=true;
         wheelDebounceTimer.start();
+        //printf("value: %f",WHEEL_reading);
     }
     else if(!enableWheelInput && WHEEL_reading < wheelNoInput && duration_cast<milliseconds>(wheelDebounceTimer.elapsed_time()).count() > wheelDebounceTime){
         enableWheelInput = true;

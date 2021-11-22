@@ -120,10 +120,10 @@
 //BUTTON AND WHEEL CONFIG
 //----------------------------------------------------------------------------
 #define wheelNoInput            0.10
-#define wheelDownInput          0.35
-#define wheelUpInput            0.35          
-#define wheelMiddle             0.50
-#define btnDebounceTime         50
+#define wheelDownInput          0.01
+#define wheelUpInput            0.12          
+#define wheelMiddle             0.39
+#define btnDebounceTime         250
 #define doubleClickTime         750
 #define wheelDebounceTime       100
 //----------------------------------------------------------------------------

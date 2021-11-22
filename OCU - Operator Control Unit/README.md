@@ -12,4 +12,10 @@ After modification it should look like,
 
 This needs to be done for every update/new download of mbed-os since mbed studio overwrites the whole folder.
 
-Tested on mbed-os 6.9
+# Build and upload
+
+The program only works if built with the Debug or Develop "Build profile".
+
+There is a bug where the programmer won´t update the code. If this happens, upload a simple program or the "clean.bin" file located in the HEX folder, then upload the the program.
+
+Tested on mbed-os 6.13
