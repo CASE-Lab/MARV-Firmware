@@ -19,7 +19,7 @@ const char* const programStrings[] = {
     "ABOUT",                    //3
     "LEAVE HAR",                //4
     "Int Var",                  //5
-    "AUTONOMOUS#WAVERUNNER#--------#NEW SYSTEM#CREATED BY#NOEL#DANIELSSON#AND#VIKTOR#LINDSTROM#--------#CHALMERS#2021#", //6
+    "MARV#--------#NEW SYSTEM#CREATED BY#NOEL#DANIELSSON#AND#VIKTOR#LINDSTROM#--------#CHALMERS#2021#", //6
     "LEFT LMT",                 //7
     "RIGHT LMT",                //8
     "OFFSET",                   //9
@@ -48,7 +48,8 @@ const char* const programStrings[] = {
     "FINISHED",                 //32
     "TIMER",                    //33
     "SYS TIME",                 //34
-    "# # #AUTONOMOUS#WAVERUNNER# # #CHALMERS#", //35
+    //"# # #----------#MARV#----------# #CHALMERS#2022#", //35
+    "#------------#MARINE#AUTONOMOUS#RESEARCH#VEHICLE#------------# # #CHALMERS#2022#", //35
     "DEACTIVATE#EXT MODE#BEFORE#STARTING#A#SCENARIO#", //36
     "REQ SENT",                 //37
     "ACU RBOT",                 //38
