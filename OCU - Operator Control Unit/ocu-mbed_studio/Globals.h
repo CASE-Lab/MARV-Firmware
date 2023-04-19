@@ -86,6 +86,10 @@ extern int32_t loggingMarker;
 extern char startToLog_msg;
 extern char stopToLog_msg;
 
+extern int32_t radarState;
+extern char startRadar_msg;
+extern char stopRadar_msg;
+
 extern char menuHeaderCAN[nbrOfCanScenarios][8];
 extern char progressString[8];
 extern bool scenarioVariablesReset;
@@ -96,7 +100,7 @@ extern char scenarioData_1[nbrOfCanScenarios][8];
 extern char scenarioDataHeader_2[nbrOfCanScenarios][8];
 extern char scenarioData_2[nbrOfCanScenarios][8];
 
-extern MenuItem mainMenuItems[5];
+extern MenuItem mainMenuItems[6];
 extern MenuItem scenarioMenuItems[2];
 //extern MenuItem settingsMenuItems[4];
 extern MenuItem aboutMenuItems[1];
@@ -118,6 +122,7 @@ extern MenuItem canUpdateMenuItems[nbrOfCanScenarios][nbrOfCanScenarioObjects];
 extern MenuItem noScenarioMenuItems[1];
 extern MenuItem notificationMessageMenuItems[1];
 extern MenuItem sysPwrExtPopupMenuItems[1];
+extern MenuItem radarMenuMenuItems[3];
 
 extern char notificationMessage[notificationMessageLength];
 extern char notification_msg;

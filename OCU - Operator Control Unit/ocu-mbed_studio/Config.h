@@ -23,7 +23,7 @@
 
 //MENU
 //----------------------------------------------------------------------------
-#define nbrOfMenus              27
+#define nbrOfMenus              28
 #define nbrOfCanScenarios       8
 #define nbrOfCanScenarioObjects 7
 #define reqExtMenu_TimeLimit    2500 //ms 
@@ -55,7 +55,8 @@
 #define noScenariosMenu_ID      16
 #define notificationMenu_ID     17
 #define sysPwrExtPopupMenu_ID   18
-#define canMenuStart_ID         19
+#define radarMenu_ID            19
+#define canMenuStart_ID         20
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 
@@ -106,6 +107,8 @@
 #define canLog2PDU_ID           995  //Message ID 34 PDU
 #define insStatus_ID            865  //Message ID 30 ACU
 #define status12V_Auto_TEMP_ID  39   //Message ID 1 OCU
+#define canRadarControl_ID_OCU  775  //Message ID 24 OCU
+#define canRadarState_ID        961  //Message ID 30 ACU
 
 //----------------------------------------------------------------------------
 

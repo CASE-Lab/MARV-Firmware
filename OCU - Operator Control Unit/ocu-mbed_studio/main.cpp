@@ -9,7 +9,7 @@
 using namespace std;
 using namespace std::chrono;
 
-#define MBED_BOOT_STACK_SIZE  0x400
+#define MBED_BOOT_STACK_SIZE  0x200
 
 //For serial menu debug
 #ifdef DISPLAY_DEBUG
@@ -142,9 +142,11 @@ void setupMenus(){
     mainMenuItems[2].setMenuLinkId(powerMenu_ID);
     mainMenuItems[3].setup(49, 5);
     mainMenuItems[3].setMenuLinkId(logDataMenu_ID);
-    mainMenuItems[4].setup(3,5); 
-    mainMenuItems[4].setMenuLinkId(aboutMenu_ID);
-    menus[mainMenu_ID] = Menu(mainMenu_ID,0,mainMenuItems,5,true,false); //Create main menu
+    mainMenuItems[4].setup(66, 5);
+    mainMenuItems[4].setMenuLinkId(radarMenu_ID);
+    mainMenuItems[5].setup(3,5); 
+    mainMenuItems[5].setMenuLinkId(aboutMenu_ID);
+    menus[mainMenu_ID] = Menu(mainMenu_ID,0,mainMenuItems,6,true,false); //Create main menu
     
     printf("A1\n\r");
     //CAN messages
@@ -374,6 +376,29 @@ void setupMenus(){
     CANMessage* loggingStopCanMessages = new CANMessage[1];
     loggingStopCanMessages[0] = CANMessage(canLogData_ID,&stopToLog_msg,1);
     loggingMenuMenuItems[1].setOnGreClickCanMsg(loggingStopCanMessages,1);
+
+//#######################
+
+//#### RADAR MENU #####
+    radarMenuMenuItems[0].setup(51, 0); //Start log command
+    radarMenuMenuItems[0].setItemDispStringIndex(14);
+    radarMenuMenuItems[1].setup(51, 0); //Stop log command
+    radarMenuMenuItems[1].setItemDispStringIndex(52);
+    radarMenuMenuItems[2].setup(27, 2); //Show logging state, on off
+    radarMenuMenuItems[2].setItemDispSetting(&radarState);
+    radarMenuMenuItems[2].setSelectable(false);
+
+    menus[radarMenu_ID] = Menu(radarMenu_ID,66,radarMenuMenuItems,3,true,false);
+
+    //CAN messages on start
+    CANMessage* radarStartCanMessages = new CANMessage[1];
+    radarStartCanMessages[0] = CANMessage(canRadarControl_ID_OCU,&startRadar_msg,1);
+    radarMenuMenuItems[0].setOnGreClickCanMsg(radarStartCanMessages,1);
+
+    //CAN messages on stop
+    CANMessage* radarStopCanMessages = new CANMessage[1];
+    radarStopCanMessages[0] = CANMessage(canRadarControl_ID_OCU,&stopRadar_msg,1);
+    radarMenuMenuItems[1].setOnGreClickCanMsg(radarStopCanMessages,1);
 
 //#######################
 

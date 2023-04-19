@@ -97,8 +97,8 @@ int main(){
 
         //log can at 25 Hz
         if(canlogTimer.elapsed_time() > Constant::CANLOG_INTERVAL){
-            Cansend::log1(&databus, apsRawOut, rpsRawOut, fcRawOut, apsOut, rpsOut, fcOut, autoOn);
-            //Cansend::log2(&databus, apsRawIn, rpsRawIn, fcRawIn, apsIn, rpsIn, fcIn, !autoOn);
+            //Cansend::log1(&databus, apsRawOut, rpsRawOut, fcRawOut, apsOut, rpsOut, fcOut, autoOn);
+            Cansend::log2(&databus, apsRawIn, rpsRawIn, fcRawIn, apsIn, rpsIn, fcIn, !autoOn);
             canlogTimer.reset();
         }
 

@@ -80,6 +80,7 @@ const char* const programStrings[] = {
     "GOOD",                     //63
     "CRITICAL",                 //64
     "INS: (HVP)",               //65
+    "RADAR",                    //66
 };
 
 Menu *activeMenu; //Keep pointer of active menu
@@ -168,6 +169,11 @@ int32_t loggingMarker = -1; //Current logging marker, -1 when not logging, x whe
 char startToLog_msg = 0x1; //Start logging can command
 char stopToLog_msg = 0x0; //Stop logging can command
 
+//Radar menu variables
+int32_t radarState = 0; //The radar state, 0=off, 1=on
+char startRadar_msg = 0x1; //Start logging can command
+char stopRadar_msg = 0x0; //Stop logging can command
+
 //CAN scenario variables
 char menuHeaderCAN[nbrOfCanScenarios][8] = {0};
 char progressString[8] = {'-','-'};
@@ -180,7 +186,7 @@ char scenarioDataHeader_2[nbrOfCanScenarios][8];
 char scenarioData_2[nbrOfCanScenarios][8] = {'-','-'};
 
 //Menu Items
-MenuItem mainMenuItems[5];
+MenuItem mainMenuItems[6];
 MenuItem scenarioMenuItems[2];
 //MenuItem settingsMenuItems[4];
 MenuItem aboutMenuItems[1];
@@ -202,6 +208,7 @@ MenuItem canUpdateMenuItems[nbrOfCanScenarios][nbrOfCanScenarioObjects];
 MenuItem noScenarioMenuItems[1];
 MenuItem notificationMessageMenuItems[1];
 MenuItem sysPwrExtPopupMenuItems[1];
+MenuItem radarMenuMenuItems[3];
 
 //Notofication variables
 char notificationMessage[notificationMessageLength] = {0};

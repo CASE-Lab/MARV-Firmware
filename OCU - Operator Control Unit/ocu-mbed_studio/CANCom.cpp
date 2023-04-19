@@ -132,6 +132,10 @@ void CANCom::updateVariables(){
                 loggingMarker = (int8_t)canBuf[canBufReadIndex].data[0];
                 break;
 
+            case canRadarState_ID:
+                radarState = (int8_t)canBuf[canBufReadIndex].data[0];
+                break;
+
             case canScenarioConfig_ID:
                 //Parse data
                 idAndLocation = (uint8_t)canBuf[canBufReadIndex].data[0];
